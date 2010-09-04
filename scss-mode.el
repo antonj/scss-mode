@@ -1,6 +1,6 @@
 ;;; scss-mode.el 
 
-;; Copyright (C) 2002 - 2015 Anton Johansson <anton.johansson@gmail.com>
+;; Author: Anton Johansson <anton.johansson@gmail.com>, http://antonj.se
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -18,17 +18,25 @@
 ;; Keywords: mode css scss
 
 ;; Info ;;;;;;;;;;;;;;;;
+;;
 ;; Command line utility sass is required, see
-;; http://sass-lang.com/ for installation To install scssc do : sudo
+;; http://sass-lang.com/ for installation
+;; To install scssc do:
 ;; gem install scss
+;;
+;; Also make sure scss location is in emacs PATH, example:
+;; (setq exec-path (cons (expand-file-name "~/.gem/ruby/1.8/bin") exec-path))
 
 ;;;###autoload
 (require 'derived)
 
 (defconst scss-font-lock-keywords
+  ;; Variables
   '(("\$[^\s:;]+" . font-lock-constant-face)))
 
-;;;###autoload (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
 ;;;###autoload
 (define-derived-mode scss-mode css-mode "Scss"
   "Major mode for editing Scss files, http://sass-lang.com/"
