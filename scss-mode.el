@@ -29,10 +29,14 @@
 
 ;;;###autoload
 (require 'derived)
+(require 'compile)
 
 (defconst scss-font-lock-keywords
   ;; Variables
   '(("\$[^\s:;]+" . font-lock-constant-face)))
+
+(customize-set-variable 'scss-compile-error-regex  
+                        '("on line \\([0-9]+\\) of \\([^ ]+\\)$" 2 1 nil 2 nil))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
@@ -41,6 +45,7 @@
 (define-derived-mode scss-mode css-mode "Scss"
   "Major mode for editing Scss files, http://sass-lang.com/"
   (font-lock-add-keywords nil scss-font-lock-keywords)
+  (add-to-list 'compilation-error-regexp-alist scss-compile-error-regex)
   (add-hook 'after-save-hook 'scss-parse nil t))
 
 (defun scss-parse()
