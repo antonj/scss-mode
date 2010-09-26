@@ -53,7 +53,8 @@ HYPERLINK HIGHLIGHT)"
 
 (defconst scss-font-lock-keywords
   ;; Variables
-  '(("\$[^\s:;]+" . font-lock-constant-face)))
+  '(("\$[^\s:;]+" . font-lock-constant-face)
+    ("//.*$" . font-lock-comment-face)))
 
 (defun scss-compile-maybe()
   "Runs `scss-compile' on if `scss-compile-at-save' is t"
