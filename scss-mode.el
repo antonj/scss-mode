@@ -1,21 +1,21 @@
 ;;; scss-mode.el --- Major mode for editing SCSS files
-
-;; Author: Anton Johansson <anton.johansson@gmail.com>
-;; URL: http://antonj.se
+;;
+;; Author: Anton Johansson <anton.johansson@gmail.com> - http://antonj.se
+;; URL: http://github.com/blastura/dot-emacs/blob/master/lisp-personal/scss-mode.el
 ;; Created: Sep 1 23:11:26 2010
-;; Keywords: mode css scss
-
+;; Keywords: scss css mode
+;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 2 of
 ;; the License, or (at your option) any later version.
-
+;;
 ;; This program is distributed in the hope that it will be
 ;; useful, but WITHOUT ANY WARRANTY; without even the implied
 ;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ;; PURPOSE.  See the GNU General Public License for more details.
-
-;; Info ;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
 ;;
 ;; Command line utility sass is required, see http://sass-lang.com/
 ;; To install sass (haml):
@@ -24,6 +24,8 @@
 ;; Also make sure sass location is in emacs PATH, example:
 ;; (setq exec-path (cons (expand-file-name "~/.gem/ruby/1.8/bin/sass") exec-path))
 ;; or customize `scss-sass-command' to point to your sass executable.
+;;
+;;; Code:
 
 (require 'derived)
 (require 'compile)
@@ -83,3 +85,4 @@ Special commands:
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 (provide 'scss-mode)
+;;; scss-mode.el ends here
