@@ -22,7 +22,7 @@
 ;; gem install haml
 ;;
 ;; Also make sure sass location is in emacs PATH, example:
-;; (setq exec-path (cons (expand-file-name "~/.gem/ruby/1.8/bin/sass") exec-path))
+;; (setq exec-path (cons (expand-file-name "~/.gem/ruby/1.8/bin") exec-path))
 ;; or customize `scss-sass-command' to point to your sass executable.
 ;;
 ;;; Code:
