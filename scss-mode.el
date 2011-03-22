@@ -1,7 +1,7 @@
 ;;; scss-mode.el --- Major mode for editing SCSS files
 ;;
 ;; Author: Anton Johansson <anton.johansson@gmail.com> - http://antonj.se
-;; URL: http://github.com/blastura/dot-emacs/blob/master/lisp-personal/scss-mode.el
+;; URL: https://github.com/antonj/scss-mode
 ;; Created: Sep 1 23:11:26 2010
 ;; Keywords: scss css mode
 ;;
