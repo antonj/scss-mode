@@ -68,8 +68,8 @@ HYPERLINK HIGHLIGHT)"
   "Compiles the current buffer, sass filename.scss filename.css"
   (interactive)
     (compile (concat scss-sass-command " " ;; " --no-cache " " --cache-location"
-          buffer-file-name " "
-          (first (split-string buffer-file-name ".scss")) ".css")))
+          "'" buffer-file-name "' '"
+          (first (split-string buffer-file-name ".scss")) ".css'")))
 
 ;;;###autoload
 (define-derived-mode scss-mode css-mode "SCSS"
