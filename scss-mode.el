@@ -56,7 +56,7 @@ HYPERLINK HIGHLIGHT)"
 
 (defconst scss-font-lock-keywords
   ;; Variables
-  '(("\$[^\s:;]+" . font-lock-constant-face)
+  '(("\$[a-z_-]+" . font-lock-constant-face)
     ("//.*$" . font-lock-comment-face)))
 
 (defun scss-compile-maybe()
