@@ -47,7 +47,7 @@
   :type 'boolean
   :group 'scss)
 
-(defcustom scss-compile-error-regex '("\\(Syntax error:\s*.*\\)\n\s*on line\s*\\([0-9]+\\) of \\([^ ]+\\)$" 3 2 nil nil 1)
+(defcustom scss-compile-error-regex '("\\(Syntax error:\s*.*\\)\n\s*on line\s*\\([0-9]+\\) of \\([^, \n]+\\)" 3 2 nil nil 1)
   "Regex for finding line number file and error message in
 compilation buffers, syntax from
 `compilation-error-regexp-alist' (REGEXP FILE LINE COLUMN TYPE
