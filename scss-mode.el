@@ -42,8 +42,13 @@
   \"~/.gem/ruby/1.8/bin/sass\""
   :group 'scss)
 
-(defcustom scss-compile-at-save t
+(defcustom scss-compile-at-save nil
   "If not nil the SCSS buffers will be compiled after each save"
+  :type 'boolean
+  :group 'scss)
+
+(defcustom scss-check-at-save t
+  "If not nil the SCSS buffers will be checked after each save"
   :type 'boolean
   :group 'scss)
 
@@ -71,6 +76,17 @@ HYPERLINK HIGHLIGHT)"
                    "'" buffer-file-name "' '"
                    (first (split-string buffer-file-name "[.]scss$")) ".css'")))
 
+(defun scss-check-maybe()
+  "Runs `scss-check' on if `scss-check-at-save' is t"
+  (if scss-check-at-save
+      (scss-check)))
+
+(defun scss-check()
+  "Check the current buffer"
+  (interactive)
+  (compile (concat scss-sass-command " " ;; " --check '" buffer-file-name "'")))
+
+
 ;;;###autoload
 (define-derived-mode scss-mode css-mode "SCSS"
   "Major mode for editing SCSS files, http://sass-lang.com/
@@ -78,7 +94,8 @@ Special commands:
 \\{scss-mode-map}"
   (font-lock-add-keywords nil scss-font-lock-keywords)
   (add-to-list 'compilation-error-regexp-alist scss-compile-error-regex)
-  (add-hook 'after-save-hook 'scss-compile-maybe nil t))
+  (add-hook 'after-save-hook 'scss-compile-maybe nil t)
+  (add-hook 'after-save-hook 'scss-check-maybe nil t))
 
 (define-key scss-mode-map "\C-c\C-c" 'scss-compile)
 
