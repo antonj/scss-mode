@@ -11,8 +11,8 @@
     [[http://i.imgur.com/Wdokb.png]]
     
     [[http://i.imgur.com/9ed6X.png]]
-    
-** Installation    
+
+** Installation
    Command line utility sass is required, http://sass-lang.com/. Make
    sure sass location is in emacs PATH, example:
    
@@ -26,3 +26,11 @@
    : (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
    : (autoload 'scss-mode "scss-mode")
    : (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+    
+** Tips
+   If you want to automatically hide the compilation buffer for every
+   successful compilation have a look at https://github.com/antonj/.emacs.d/blob/master/aj-compilation.el
+
+   All successful compilations in other modes are also hidden, except
+   for rgrep "compilations" where a successful compilation is what you
+   are interested in...
