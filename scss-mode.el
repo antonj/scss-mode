@@ -3,6 +3,7 @@
 ;; Author: Anton Johansson <anton.johansson@gmail.com> - http://antonj.se
 ;; URL: https://github.com/antonj/scss-mode
 ;; Created: Sep 1 23:11:26 2010
+;; Version: 0.5.0
 ;; Keywords: scss css mode
 ;;
 ;; This program is free software; you can redistribute it and/or
@@ -47,6 +48,11 @@
   :type 'boolean
   :group 'scss)
 
+(defcustom scss-sass-options '()
+  "Command line Options for sass executable, for example:
+'(\"--cache-location\" \"'/tmp/.sass-cache'\")"
+  :group 'scss)
+
 (defcustom scss-compile-error-regex '("\\(Syntax error:\s*.*\\)\n\s*on line\s*\\([0-9]+\\) of \\([^, \n]+\\)" 3 2 nil nil 1)
   "Regex for finding line number file and error message in
 compilation buffers, syntax from
@@ -67,7 +73,7 @@ HYPERLINK HIGHLIGHT)"
 (defun scss-compile()
   "Compiles the current buffer, sass filename.scss filename.css"
   (interactive)
-  (compile (concat scss-sass-command " " ;; " --no-cache " " --cache-location"
+  (compile (concat scss-sass-command " " (mapconcat 'identity scss-sass-options " ") " "
                    "'" buffer-file-name "' '"
                    (first (split-string buffer-file-name "[.]scss$")) ".css'")))
 
@@ -89,7 +95,7 @@ Special commands:
          (local-file  (file-relative-name
                        temp-file
                        (file-name-directory buffer-file-name))))
-    (list scss-sass-command (list "--scss" "--check" local-file))))
+    (list scss-sass-command (append scss-sass-options (list "--scss" "--check" local-file)))))
 
 (push '(".+\\.scss$" flymake-scss-init) flymake-allowed-file-name-masks)
 
