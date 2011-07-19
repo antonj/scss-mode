@@ -13,7 +13,7 @@
     [[http://i.imgur.com/9ed6X.png]]
 
 ** Installation
-   Command line utility sass is required, http://sass-lang.com/. Make
+   Command line utility sass is required, [[http://sass-lang.com/]]. Make
    sure sass location is in emacs PATH, example:
    
    : (setq exec-path (cons (expand-file-name "~/.gem/ruby/1.8/bin") exec-path))
@@ -29,7 +29,7 @@
     
 ** Tips
    If you want to automatically hide the compilation buffer for every
-   successful compilation have a look at https://github.com/antonj/.emacs.d/blob/master/aj-compilation.el
+   successful compilation have a look at [[https://github.com/antonj/.emacs.d/blob/master/aj-compilation.el][aj-compilation.el]]
 
    All successful compilations in other modes are also hidden, except
    for rgrep "compilations" where a successful compilation is what you
