@@ -53,6 +53,11 @@
 '(\"--cache-location\" \"'/tmp/.sass-cache'\")"
   :group 'scss)
 
+(defcustom scss-output-directory nil
+  "Output directory for compiled files, for example:
+\"../css\""
+  :group 'scss)
+
 (defcustom scss-compile-error-regex '("\\(Syntax error:\s*.*\\)\n\s*on line\s*\\([0-9]+\\) of \\([^, \n]+\\)" 3 2 nil nil 1)
   "Regex for finding line number file and error message in
 compilation buffers, syntax from
@@ -74,7 +79,10 @@ HYPERLINK HIGHLIGHT)"
   (interactive)
   (compile (concat scss-sass-command " " (mapconcat 'identity scss-sass-options " ") " "
                    "'" buffer-file-name "' '"
-                   (first (split-string buffer-file-name "[.]scss$")) ".css'")))
+                   (if scss-output-directory
+                       (when (string-match ".*/\\(.+\\)[.]scss$" buffer-file-name)
+                         (concat scss-output-directory "/" (match-string 1 buffer-file-name)))
+                     (first (split-string buffer-file-name "[.]scss$"))) ".css'")))
 
 ;;;###autoload
 (define-derived-mode scss-mode css-mode "SCSS"
