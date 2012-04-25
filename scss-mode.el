@@ -84,8 +84,9 @@ Special commands:
   (font-lock-add-keywords nil scss-font-lock-keywords)
   ;; Add the single-line comment syntax ('//', ends with newline)
   ;; as comment style 'b' (see "Syntax Flags" in elisp manual)
-  (modify-syntax-entry ?/ ". 124b" css-mode-syntax-table)
-  (modify-syntax-entry ?\n "> b" css-mode-syntax-table)
+  (modify-syntax-entry ?/ ". 124" css-mode-syntax-table)
+  (modify-syntax-entry ?* ". 23b" css-mode-syntax-table)
+  (modify-syntax-entry ?\n ">" css-mode-syntax-table)
   (add-to-list 'compilation-error-regexp-alist scss-compile-error-regex)
   (add-hook 'after-save-hook 'scss-compile-maybe nil t))
 
