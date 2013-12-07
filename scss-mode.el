@@ -65,6 +65,13 @@ compilation buffers, syntax from
 HYPERLINK HIGHLIGHT)"
   :group 'scss)
 
+(defcustom scss-mode-hook nil
+  "Hook called by `scss-mode'.  Example:
+
+      (setq scss-compile-at-save nil)	;disable compile on save"
+  :type 'hook
+  :group 'scss)
+
 (defconst scss-font-lock-keywords
   ;; Variables
   '(("$[a-z_-][a-z-_0-9]*" . font-lock-constant-face)))
