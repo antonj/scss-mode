@@ -43,7 +43,7 @@
   \"~/.gem/ruby/1.8/bin/sass\""
   :group 'scss)
 
-(defcustom scss-compile-at-save t
+(defcustom scss-compile-at-save nil
   "If not nil the SCSS buffers will be compiled after each save"
   :type 'boolean
   :group 'scss)
