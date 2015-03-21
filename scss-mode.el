@@ -31,6 +31,11 @@
 (require 'derived)
 (require 'compile)
 (require 'flymake)
+(require 'css-mode) ; For `css-mode-syntax-table'.
+
+(eval-and-compile
+  (require 'cc-styles)  ; For `c-setup-paragraph-variables'.
+  (require 'cc-engine)) ; For `c-paragraph-start' et. al.
 
 (defgroup scss nil
   "Scss mode"
@@ -69,6 +74,32 @@ HYPERLINK HIGHLIGHT)"
   ;; Variables
   '(("$[a-z_-][a-z-_0-9]*" . font-lock-constant-face)))
 
+(defconst scss-comment-start-skip
+  "\\(//+\\|/\\*+\\)\\s *")
+
+(defconst scss-comment-prefix-regexp
+  "//+\\|\\**")
+
+(defconst scss-comment-start-regexp
+  "/[*/]\\|\\s|")
+
+(defconst scss-paragraph-start
+  "\\(@[[:alpha:]]+\\>\\|$\\)")
+
+(defconst scss-syntactic-ws-start
+  "\\s \\|/[*/]\\|[\n\r]\\|\\\\[\n\r]\\|\\s!\\|<!--\\|^\\s-*-->")
+
+(defconst scss-syntactic-ws-end
+  "\\s \\|[\n\r/]\\|\\s!")
+
+(defconst scss-syntactic-eol
+  (concat "\\s *\\(/\\*[^*\n\r]*"
+          "\\(\\*+[^*\n\r/][^*\n\r]*\\)*"
+          "\\*+/\\s *\\)*"
+          "\\(//\\|/\\*[^*\n\r]*"
+          "\\(\\*+[^*\n\r/][^*\n\r]*\\)*$"
+          "\\|\\\\$\\|$\\)"))
+
 (defun scss-compile-maybe()
   "Runs `scss-compile' on if `scss-compile-at-save' is t"
   (if scss-compile-at-save
@@ -94,6 +125,35 @@ Special commands:
   (modify-syntax-entry ?/ ". 124" css-mode-syntax-table)
   (modify-syntax-entry ?* ". 23b" css-mode-syntax-table)
   (modify-syntax-entry ?\n ">" css-mode-syntax-table)
+
+  ;; Prefer single-line comments for `comment-region'.  These variables are also
+  ;; used by `fill-paragraph' for single-line comments.
+  (setq-local comment-start "//")
+  (setq-local comment-end "")
+  (setq-local comment-start-skip scss-comment-start-skip)
+  (setq-local comment-end-skip nil) ; Override `css-mode'.
+
+  ;; Some variables needed by `cc-engine' for `fill-paragraph', etc.  Copied
+  ;; from `js2-mode'.
+  (setq-local fill-paragraph-function 'c-fill-paragraph)
+  (setq-local c-comment-prefix-regexp scss-comment-prefix-regexp)
+  (setq c-comment-start-regexp scss-comment-start-regexp)
+  (setq c-line-comment-starter "//")
+  (setq c-paragraph-start scss-paragraph-start)
+  (setq c-paragraph-separate "$")
+  (setq c-syntactic-ws-start scss-syntactic-ws-start)
+  (setq c-syntactic-ws-end scss-syntactic-ws-end)
+  (setq c-syntactic-eol scss-syntactic-eol)
+
+  (let ((c-buffer-is-cc-mode t))
+    ;; Copied from `js-mode'.  Also see Bug#6071.
+    (make-local-variable 'paragraph-start)
+    (make-local-variable 'paragraph-separate)
+    (make-local-variable 'paragraph-ignore-fill-prefix)
+    (make-local-variable 'adaptive-fill-mode)
+    (make-local-variable 'adaptive-fill-regexp)
+    (c-setup-paragraph-variables))
+
   (add-to-list 'compilation-error-regexp-alist scss-compile-error-regex)
   (add-hook 'after-save-hook 'scss-compile-maybe nil t))
 
