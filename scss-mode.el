@@ -32,6 +32,7 @@
 (require 'compile)
 (require 'flymake)
 (require 'css-mode) ; For `css-mode-syntax-table'.
+(require 'cc-cmds)  ; For `c-fill-paragraph'.
 
 (eval-and-compile
   (require 'cc-styles)  ; For `c-setup-paragraph-variables'.
