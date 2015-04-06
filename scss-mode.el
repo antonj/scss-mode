@@ -32,7 +32,7 @@
 (require 'compile)
 (require 'flymake)
 (require 'css-mode) ; For `css-mode-syntax-table'.
-(require 'cc-cmds)  ; For `c-fill-paragraph'.
+(require 'cc-cmds)  ; For `c-fill-paragraph', `c-indent-new-comment-line'.
 
 (eval-and-compile
   (require 'cc-styles)  ; For `c-setup-paragraph-variables'.
@@ -137,6 +137,7 @@ Special commands:
   ;; Some variables needed by `cc-engine' for `fill-paragraph', etc.  Copied
   ;; from `js2-mode'.
   (setq-local fill-paragraph-function 'c-fill-paragraph)
+  (setq-local comment-line-break-function 'c-indent-new-comment-line)
   (setq-local c-comment-prefix-regexp scss-comment-prefix-regexp)
   (setq c-comment-start-regexp scss-comment-start-regexp)
   (setq c-line-comment-starter "//")
@@ -159,6 +160,9 @@ Special commands:
   (add-hook 'after-save-hook 'scss-compile-maybe nil t))
 
 (define-key scss-mode-map "\C-c\C-c" 'scss-compile)
+
+;; Weirdly this is still needed when `comment-line-break-function' is bound.
+(define-key scss-mode-map (kbd "M-j") 'c-indent-new-comment-line)
 
 (defun flymake-scss-init ()
   "Flymake support for SCSS files"
