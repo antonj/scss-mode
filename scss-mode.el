@@ -53,6 +53,11 @@
 '(\"--cache-location\" \"'/tmp/.sass-cache'\")"
   :group 'scss)
 
+(defcustom scss-output-style nil
+  "Output style for the complied css. Can be nested, expanded,
+compact, compressed. If nil, defaults to nested."
+  :group 'scss)
+
 (defcustom scss-output-directory nil
   "Output directory for compiled files, for example:
 \"../css\""
