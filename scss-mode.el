@@ -38,24 +38,28 @@
   :group 'css)
 
 (defcustom scss-sass-command "sass"
-  "Command used to compile SCSS files, should be sass or the
-  complete path to your sass runnable example:
-  \"~/.gem/ruby/1.8/bin/sass\""
+  "Command used to compile SCSS files.
+Should be sass or the complete path to your sass runnable
+example: \"~/.gem/ruby/1.8/bin/sass\""
+  :type 'string
   :group 'scss)
 
 (defcustom scss-compile-at-save nil
-  "If not nil the SCSS buffers will be compiled after each save"
+  "If not nil the SCSS buffers will be compiled after each save."
   :type 'boolean
   :group 'scss)
 
 (defcustom scss-sass-options '()
   "Command line Options for sass executable, for example:
 '(\"--cache-location\" \"'/tmp/.sass-cache'\")"
+  :type '(repeat string)
   :group 'scss)
 
 (defcustom scss-output-directory nil
-  "Output directory for compiled files, for example:
-\"../css\""
+  "Output directory for compiled files, for example: \"../css\".
+If nil, do not add any output directory option to `scss-sass-command'."
+  :type '(choice (const :tag "Same dir" nil)
+				 (string :tag "Relative dir"))
   :group 'scss)
 
 (defcustom scss-compile-error-regex '("\\(Syntax error:\s*.*\\)\n\s*on line\s*\\([0-9]+\\) of \\([^, \n]+\\)" 3 2 nil nil 1)
@@ -63,6 +67,7 @@
 compilation buffers, syntax from
 `compilation-error-regexp-alist' (REGEXP FILE LINE COLUMN TYPE
 HYPERLINK HIGHLIGHT)"
+  :type 'regexp
   :group 'scss)
 
 (defconst scss-font-lock-keywords
