@@ -24,8 +24,9 @@
    Add something like this to your emacs load file:
 
    : (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
-   : (autoload 'scss-mode "scss-mode")
-   : (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+   : (require 'scss-mode)
+   : (add-hook 'scss-mode-hook 'auto-complete-mode) ;; optional but reccomended
+   : (add-hook 'scss-mode-hook 'flyspell-mode)      ;; optional but reccomended
     
 ** Tips
    If you want to automatically hide the compilation buffer for every
